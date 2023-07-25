@@ -64,6 +64,23 @@ diesel::table! {
 }
 
 diesel::table! {
+    AG_DIALOG (MANDANT_NR, UID) {
+        MANDANT_NR -> Integer,
+        UID -> Text,
+        API -> Text,
+        DATUM -> Date,
+        NR -> Integer,
+        URL -> Nullable<Text>,
+        FRAGE -> Nullable<Text>,
+        ANTWORT -> Nullable<Text>,
+        ANGELEGT_VON -> Nullable<Text>,
+        ANGELEGT_AM -> Nullable<Timestamp>,
+        GEAENDERT_VON -> Nullable<Text>,
+        GEAENDERT_AM -> Nullable<Timestamp>,
+    }
+}
+
+diesel::table! {
     BENUTZER (MANDANT_NR, BENUTZER_ID) {
         MANDANT_NR -> Integer,
         BENUTZER_ID -> Text,
@@ -183,51 +200,6 @@ diesel::table! {
         GEAENDERT_VON -> Nullable<Text>,
         GEAENDERT_AM -> Nullable<Timestamp>,
         REPLIKATION_UID -> Nullable<Text>,
-    }
-}
-
-diesel::table! {
-    FZ_LEKTION (MANDANT_NR, UID) {
-        MANDANT_NR -> Integer,
-        UID -> Text,
-        BEZEICHNUNG -> Text,
-        STICHWORT -> Text,
-        INHALT1 -> Text,
-        INHALT2 -> Text,
-        INHALT3 -> Text,
-        ANGELEGT_VON -> Nullable<Text>,
-        ANGELEGT_AM -> Nullable<Timestamp>,
-        GEAENDERT_VON -> Nullable<Text>,
-        GEAENDERT_AM -> Nullable<Timestamp>,
-    }
-}
-
-diesel::table! {
-    FZ_LEKTIONINHALT (MANDANT_NR, LEKTION_UID, LFD_NR) {
-        MANDANT_NR -> Integer,
-        LEKTION_UID -> Text,
-        LFD_NR -> Integer,
-        STICHWORT -> Text,
-        INHALT1 -> Text,
-        INHALT2 -> Nullable<Text>,
-        INHALT3 -> Nullable<Text>,
-        ANGELEGT_VON -> Nullable<Text>,
-        ANGELEGT_AM -> Nullable<Timestamp>,
-        GEAENDERT_VON -> Nullable<Text>,
-        GEAENDERT_AM -> Nullable<Timestamp>,
-        REPLIKATION_UID -> Nullable<Text>,
-    }
-}
-
-diesel::table! {
-    FZ_LEKTIONSTAND (MANDANT_NR, LEKTION_UID) {
-        MANDANT_NR -> Integer,
-        LEKTION_UID -> Text,
-        STAND -> Nullable<Text>,
-        ANGELEGT_VON -> Nullable<Text>,
-        ANGELEGT_AM -> Nullable<Timestamp>,
-        GEAENDERT_VON -> Nullable<Text>,
-        GEAENDERT_AM -> Nullable<Timestamp>,
     }
 }
 
@@ -485,91 +457,6 @@ diesel::table! {
 }
 
 diesel::table! {
-    MA_REPLIKATION (MANDANT_NR, TABELLEN_NR, REPLIKATION_UID) {
-        MANDANT_NR -> Integer,
-        TABELLEN_NR -> Integer,
-        REPLIKATION_UID -> Text,
-        IST_GELOESCHT -> Bool,
-        GEAENDERT_AM -> Nullable<Timestamp>,
-        GELOESCHT_AM -> Nullable<Timestamp>,
-    }
-}
-
-diesel::table! {
-    MO_EINTEILUNG (MANDANT_NR, UID) {
-        MANDANT_NR -> Integer,
-        UID -> Text,
-        GOTTESDIENST_UID -> Text,
-        MESSDIENER_UID -> Text,
-        TERMIN -> Date,
-        DIENST -> Text,
-        ANGELEGT_VON -> Nullable<Text>,
-        ANGELEGT_AM -> Nullable<Timestamp>,
-        GEAENDERT_VON -> Nullable<Text>,
-        GEAENDERT_AM -> Nullable<Timestamp>,
-    }
-}
-
-diesel::table! {
-    MO_GOTTESDIENST (MANDANT_NR, UID) {
-        MANDANT_NR -> Integer,
-        UID -> Text,
-        TERMIN -> Date,
-        NAME -> Text,
-        ORT -> Text,
-        PROFIL_UID -> Nullable<Text>,
-        STATUS -> Nullable<Text>,
-        NOTIZ -> Nullable<Text>,
-        ANGELEGT_VON -> Nullable<Text>,
-        ANGELEGT_AM -> Nullable<Timestamp>,
-        GEAENDERT_VON -> Nullable<Text>,
-        GEAENDERT_AM -> Nullable<Timestamp>,
-    }
-}
-
-diesel::table! {
-    MO_MESSDIENER (MANDANT_NR, UID) {
-        MANDANT_NR -> Integer,
-        UID -> Text,
-        NAME -> Text,
-        VORNAME -> Nullable<Text>,
-        VON -> Date,
-        BIS -> Nullable<Date>,
-        ADRESSE1 -> Nullable<Text>,
-        ADRESSE2 -> Nullable<Text>,
-        ADRESSE3 -> Nullable<Text>,
-        EMAIL -> Nullable<Text>,
-        EMAIL2 -> Nullable<Text>,
-        TELEFON -> Nullable<Text>,
-        TELEFON2 -> Nullable<Text>,
-        VERFUEGBARKEIT -> Nullable<Text>,
-        DIENSTE -> Nullable<Text>,
-        MESSDIENER_UID -> Nullable<Text>,
-        STATUS -> Nullable<Text>,
-        NOTIZ -> Nullable<Text>,
-        ANGELEGT_VON -> Nullable<Text>,
-        ANGELEGT_AM -> Nullable<Timestamp>,
-        GEAENDERT_VON -> Nullable<Text>,
-        GEAENDERT_AM -> Nullable<Timestamp>,
-    }
-}
-
-diesel::table! {
-    MO_PROFIL (MANDANT_NR, UID) {
-        MANDANT_NR -> Integer,
-        UID -> Text,
-        NAME -> Text,
-        ALLE -> Integer,
-        DIENSTE -> Nullable<Text>,
-        NOTIZ -> Nullable<Text>,
-        ANGELEGT_VON -> Nullable<Text>,
-        ANGELEGT_AM -> Nullable<Timestamp>,
-        GEAENDERT_VON -> Nullable<Text>,
-        GEAENDERT_AM -> Nullable<Timestamp>,
-    }
-}
-
-diesel::table! {
     SB_EREIGNIS (MANDANT_NR, PERSON_UID, FAMILIE_UID, TYP, TAG1, MONAT1, JAHR1) {
         MANDANT_NR -> Integer,
         PERSON_UID -> Text,
@@ -696,6 +583,7 @@ diesel::table! {
         BREITE -> Double,
         LAENGE -> Double,
         HOEHE -> Double,
+        ZEITZONE -> Nullable<Text>,
         NOTIZ -> Nullable<Text>,
         ANGELEGT_VON -> Nullable<Text>,
         ANGELEGT_AM -> Nullable<Timestamp>,
@@ -705,143 +593,12 @@ diesel::table! {
 }
 
 diesel::table! {
-    VM_ABRECHNUNG (MANDANT_NR, UID) {
+    TB_WETTER (MANDANT_NR, DATUM, ORT_UID, API) {
         MANDANT_NR -> Integer,
-        UID -> Text,
-        HAUS_UID -> Text,
-        WOHNUNG_UID -> Nullable<Text>,
-        MIETER_UID -> Nullable<Text>,
-        DATUM_VON -> Date,
-        DATUM_BIS -> Date,
-        SCHLUESSEL -> Text,
-        BESCHREIBUNG -> Nullable<Text>,
-        WERT -> Nullable<Text>,
-        BETRAG -> Double,
-        DATUM -> Nullable<Timestamp>,
-        REIHENFOLGE -> Text,
-        STATUS -> Text,
-        FUNKTION -> Nullable<Text>,
-        NOTIZ -> Nullable<Text>,
-        ANGELEGT_VON -> Nullable<Text>,
-        ANGELEGT_AM -> Nullable<Timestamp>,
-        GEAENDERT_VON -> Nullable<Text>,
-        GEAENDERT_AM -> Nullable<Timestamp>,
-    }
-}
-
-diesel::table! {
-    VM_BUCHUNG (MANDANT_NR, UID) {
-        MANDANT_NR -> Integer,
-        UID -> Text,
-        SCHLUESSEL -> Text,
-        HAUS_UID -> Nullable<Text>,
-        WOHNUNG_UID -> Nullable<Text>,
-        MIETER_UID -> Nullable<Text>,
-        NOTIZ -> Nullable<Text>,
-        ANGELEGT_VON -> Nullable<Text>,
-        ANGELEGT_AM -> Nullable<Timestamp>,
-        GEAENDERT_VON -> Nullable<Text>,
-        GEAENDERT_AM -> Nullable<Timestamp>,
-    }
-}
-
-diesel::table! {
-    VM_EREIGNIS (MANDANT_NR, UID) {
-        MANDANT_NR -> Integer,
-        UID -> Text,
-        SCHLUESSEL -> Nullable<Text>,
-        HAUS_UID -> Nullable<Text>,
-        WOHNUNG_UID -> Nullable<Text>,
-        MIETER_UID -> Nullable<Text>,
-        NOTIZ -> Nullable<Text>,
-        ANGELEGT_VON -> Nullable<Text>,
-        ANGELEGT_AM -> Nullable<Timestamp>,
-        GEAENDERT_VON -> Nullable<Text>,
-        GEAENDERT_AM -> Nullable<Timestamp>,
-    }
-}
-
-diesel::table! {
-    VM_HAUS (MANDANT_NR, UID) {
-        MANDANT_NR -> Integer,
-        UID -> Text,
-        BEZEICHNUNG -> Text,
-        STRASSE -> Nullable<Text>,
-        PLZ -> Nullable<Text>,
-        ORT -> Nullable<Text>,
-        NOTIZ -> Nullable<Text>,
-        ANGELEGT_VON -> Nullable<Text>,
-        ANGELEGT_AM -> Nullable<Timestamp>,
-        GEAENDERT_VON -> Nullable<Text>,
-        GEAENDERT_AM -> Nullable<Timestamp>,
-    }
-}
-
-diesel::table! {
-    VM_KONTO (MANDANT_NR, UID) {
-        MANDANT_NR -> Integer,
-        UID -> Text,
-        SCHLUESSEL -> Nullable<Text>,
-        HAUS_UID -> Nullable<Text>,
-        WOHNUNG_UID -> Nullable<Text>,
-        MIETER_UID -> Nullable<Text>,
-        NOTIZ -> Nullable<Text>,
-        ANGELEGT_VON -> Nullable<Text>,
-        ANGELEGT_AM -> Nullable<Timestamp>,
-        GEAENDERT_VON -> Nullable<Text>,
-        GEAENDERT_AM -> Nullable<Timestamp>,
-    }
-}
-
-diesel::table! {
-    VM_MIETE (MANDANT_NR, UID) {
-        MANDANT_NR -> Integer,
-        UID -> Text,
-        WOHNUNG_UID -> Text,
         DATUM -> Date,
-        MIETE -> Double,
-        NEBENKOSTEN -> Double,
-        GARAGE -> Double,
-        HEIZUNG -> Double,
-        PERSONEN -> Integer,
-        NOTIZ -> Nullable<Text>,
-        ANGELEGT_VON -> Nullable<Text>,
-        ANGELEGT_AM -> Nullable<Timestamp>,
-        GEAENDERT_VON -> Nullable<Text>,
-        GEAENDERT_AM -> Nullable<Timestamp>,
-    }
-}
-
-diesel::table! {
-    VM_MIETER (MANDANT_NR, UID) {
-        MANDANT_NR -> Integer,
-        UID -> Text,
-        WOHNUNG_UID -> Text,
-        NAME -> Text,
-        VORNAME -> Nullable<Text>,
-        ANREDE -> Nullable<Text>,
-        EINZUGDATUM -> Nullable<Date>,
-        AUSZUGDATUM -> Nullable<Date>,
-        WOHNUNG_QM -> Double,
-        WOHNUNG_GRUNDMIETE -> Double,
-        WOHNUNG_KAUTION -> Double,
-        WOHNUNG_ANTENNE -> Double,
-        STATUS -> Integer,
-        NOTIZ -> Nullable<Text>,
-        ANGELEGT_VON -> Nullable<Text>,
-        ANGELEGT_AM -> Nullable<Timestamp>,
-        GEAENDERT_VON -> Nullable<Text>,
-        GEAENDERT_AM -> Nullable<Timestamp>,
-    }
-}
-
-diesel::table! {
-    VM_WOHNUNG (MANDANT_NR, UID) {
-        MANDANT_NR -> Integer,
-        UID -> Text,
-        HAUS_UID -> Text,
-        BEZEICHNUNG -> Text,
-        NOTIZ -> Nullable<Text>,
+        ORT_UID -> Text,
+        API -> Text,
+        WERTE -> Nullable<Text>,
         ANGELEGT_VON -> Nullable<Text>,
         ANGELEGT_AM -> Nullable<Timestamp>,
         GEAENDERT_VON -> Nullable<Text>,
@@ -934,6 +691,7 @@ diesel::allow_tables_to_appear_in_same_query!(
     AD_ADRESSE,
     AD_PERSON,
     AD_SITZ,
+    AG_DIALOG,
     BENUTZER,
     BYTE_DATEN,
     FZ_BUCH,
@@ -942,9 +700,6 @@ diesel::allow_tables_to_appear_in_same_query!(
     FZ_BUCHSTATUS,
     FZ_FAHRRAD,
     FZ_FAHRRADSTAND,
-    FZ_LEKTION,
-    FZ_LEKTIONINHALT,
-    FZ_LEKTIONSTAND,
     FZ_NOTIZ,
     HH_BILANZ,
     HH_BUCHUNG,
@@ -960,11 +715,6 @@ diesel::allow_tables_to_appear_in_same_query!(
     HP_STATUS,
     MA_MANDANT,
     MA_PARAMETER,
-    MA_REPLIKATION,
-    MO_EINTEILUNG,
-    MO_GOTTESDIENST,
-    MO_MESSDIENER,
-    MO_PROFIL,
     SB_EREIGNIS,
     SB_FAMILIE,
     SB_KIND,
@@ -973,14 +723,7 @@ diesel::allow_tables_to_appear_in_same_query!(
     TB_EINTRAG,
     TB_EINTRAG_ORT,
     TB_ORT,
-    VM_ABRECHNUNG,
-    VM_BUCHUNG,
-    VM_EREIGNIS,
-    VM_HAUS,
-    VM_KONTO,
-    VM_MIETE,
-    VM_MIETER,
-    VM_WOHNUNG,
+    TB_WETTER,
     WP_ANLAGE,
     WP_BUCHUNG,
     WP_KONFIGURATION,
