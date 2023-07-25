@@ -1,0 +1,16 @@
+[package]
+name = "rrbp"
+version = "0.1.0"
+authors = ["Wolfgang Kuehl <wolfgang@cwkuehl.de>"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[profile]
+dev = { opt-level = 0, debuginfo = 2, panic = "unwind" }
+release = { opt-level = 3, panic = "abort" }
+
+[dependencies]
+rep = { path = "./rep" }
+rocket = { version = "0.5.0-rc", features = ["json", "secrets"]}
+diesel = { version = "2.1", features = ["sqlite", "chrono"]}
