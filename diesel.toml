@@ -4,3 +4,6 @@
 [print_schema]
 file = "src/rep/schema.rs"
 filter = { except_tables = ["FZ_LEKTION","FZ_LEKTIONINHALT","FZ_LEKTIONSTAND","MA_REPLIKATION","MO_EINTEILUNG","MO_GOTTESDIENST","MO_MESSDIENER","MO_PROFIL","VM_ABRECHNUNG","VM_BUCHUNG","VM_EREIGNIS","VM_HAUS","VM_KONTO","VM_MIETE","VM_MIETER","VM_WOHNUNG"] }
+#generate_missing_sql_type_definitions = true
+# Derive `SqlType` and `Debug` for the automatically generated sql type definitions
+#custom_type_derives = ["diesel::sql_types::SqlType", "std::fmt::Debug"]

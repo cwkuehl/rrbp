@@ -1,2 +1,2 @@
 [default.databases]
-sqlite_logs = { url = "/home/wolfgang/hsqldb/rsbp.db" }
+sqlite_db = { url = "/home/wolfgang/hsqldb/rsbp.db" }

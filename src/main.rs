@@ -1,14 +1,14 @@
 #[macro_use]
 extern crate rocket;
 
-//#[macro_use]
-//extern crate diesel;
+// #[macro_use]
+extern crate diesel;
 
-// fn main() {
-//     println!("Hello, world!");
-// }
+use reps::DbCon;
+
+mod reps;
 
 #[launch]
 fn launch() -> _ {
-    rocket::build()
+    rocket::build().attach(DbCon::fairing())
 }
