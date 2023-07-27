@@ -1,2 +1,9 @@
+[default]
+secret_key = "4da3f585b0f57b8bfa1306051902f1cd8d01e2e8f211f484dcdea00cafdc1626"
+
 [default.databases]
 sqlite_db = { url = "/home/wolfgang/hsqldb/rsbp.db" }
+
+[default.tls]
+certs = "/opt/Haushalt/CSBP/cert/cert.pem"
+key = "/opt/Haushalt/CSBP/cert/cert.key"
