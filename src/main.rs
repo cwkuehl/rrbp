@@ -50,6 +50,7 @@ fn launch() -> _ {
                 .register_helper("to_lower_case", Box::new(to_lower_case));
         }))
         //.attach(Template::fairing())
+        .mount("/", routes![routes::root::json,])
         .mount(
             "/public/",
             routes![
