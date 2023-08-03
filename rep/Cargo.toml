@@ -8,3 +8,7 @@ edition = "2021"
 
 [dependencies]
 diesel = { version = "*", features = ["sqlite", "chrono"] }
+
+[dev-dependencies]
+quick-xml = { version = "*" } # parse xml
+heck = { version = "*" }      # camelCase
