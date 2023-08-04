@@ -29,6 +29,7 @@ mod tests {
             .filter(|a| {
                 !a.name.starts_with("HP_")
                     && !a.name.starts_with("MO_")
+                    && !a.name.starts_with("SO_xxx")
                     && !a.name.starts_with("VM_")
                 //&& a.name == "MA_Parameter"
             })
@@ -45,7 +46,7 @@ mod tests {
                 create_schema(&t),
             )
             .unwrap();
-        } else if self::mach_nichts() == 1 {
+            //} else if self::mach_nichts() == 1 {
             std::fs::write(
                 "/home/wolfgang/rust/rrbp/rep/src/models.rs",
                 create_models(&t),
@@ -609,7 +610,7 @@ impl UndoEntry {
 
     /// Datei schema.rs zusammenstellen.
     fn create_schema(tables: &Vec<&Table>) -> String {
-        let mut sb = r#"use diesel::table;
+        let mut sb = r#"use diesel::{table, allow_tables_to_appear_in_same_query};
 "#
         .to_string();
         for t in tables.iter() {
@@ -653,6 +654,25 @@ table! {{
 "#,
             );
         }
+        sb.push_str(
+            r#"
+allow_tables_to_appear_in_same_query!("#,
+        );
+        for t in tables.iter() {
+            sb.push_str(
+                format!(
+                    r#"
+{},"#,
+                    t.name.to_uppercase()
+                )
+                .as_str(),
+            );
+        }
+        sb.push_str(
+            r#"
+);
+"#,
+        );
         sb
     }
 
@@ -671,7 +691,7 @@ table! {{
 use chrono::{{NaiveDate, NaiveDateTime}};
 use serde::{{Deserialize, Serialize}};
 "#,
-            j
+            j,
         );
         for t in tables.iter() {
             // Model
@@ -914,17 +934,7 @@ impl Revision for {} {{
                                 let key0 = key.as_ref().clone();
                                 let key1 = std::str::from_utf8(key0).unwrap().to_string();
                                 let key2 = Box::new(key1);
-                                (
-                                    key2,
-                                    // Box::new(
-                                    //     std::str::from_utf8(at.key.local_name().as_ref().clone())
-                                    //         .unwrap()
-                                    //         .clone(),
-                                    // ),
-                                    //"key",
-                                    //"value".to_string(),
-                                    std::str::from_utf8(&at.value).unwrap().to_string(),
-                                )
+                                (key2, std::str::from_utf8(&at.value).unwrap().to_string())
                             })
                             .collect::<Vec<_>>();
                         let mut c = Column {
