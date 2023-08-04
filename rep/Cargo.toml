@@ -8,6 +8,8 @@ edition = "2021"
 
 [dependencies]
 diesel = { version = "*", features = ["sqlite", "chrono"] }
+serde = { version = "*", features = ["derive"] }
+chrono = { version = "*", features = ["serde"] }
 
 [dev-dependencies]
 quick-xml = { version = "*" } # parse xml

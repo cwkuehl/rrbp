@@ -1,8 +1,15 @@
 use crate::{
-    apis::revision::Revision,
-    schema::{AD_ADRESSE, AD_PERSON, AD_SITZ, AG_DIALOG, BENUTZER, BYTE_DATEN, FZ_BUCH, FZ_BUCHAUTOR, FZ_BUCHSERIE, FZ_BUCHSTATUS, FZ_FAHRRAD, FZ_FAHRRADSTAND, FZ_NOTIZ, HH_BILANZ, HH_BUCHUNG, HH_EREIGNIS, HH_KONTO, HH_PERIODE, MA_MANDANT, MA_PARAMETER, SB_EREIGNIS, SB_FAMILIE, SB_KIND, SB_PERSON, SB_QUELLE, SO_KURSE, TB_EINTRAG, TB_EINTRAG_ORT, TB_ORT, TB_WETTER, WP_ANLAGE, WP_BUCHUNG, WP_KONFIGURATION, WP_STAND, WP_WERTPAPIER},
+    revision::Revision,
+    schema::{
+        AD_ADRESSE, AD_PERSON, AD_SITZ, AG_DIALOG, BENUTZER, BYTE_DATEN, FZ_BUCH, FZ_BUCHAUTOR,
+        FZ_BUCHSERIE, FZ_BUCHSTATUS, FZ_FAHRRAD, FZ_FAHRRADSTAND, FZ_NOTIZ, HH_BILANZ, HH_BUCHUNG,
+        HH_EREIGNIS, HH_KONTO, HH_PERIODE, MA_MANDANT, MA_PARAMETER, SB_EREIGNIS, SB_FAMILIE,
+        SB_KIND, SB_PERSON, SB_QUELLE, SO_KURSE, TB_EINTRAG, TB_EINTRAG_ORT, TB_ORT, TB_WETTER,
+        WP_ANLAGE, WP_BUCHUNG, WP_KONFIGURATION, WP_STAND, WP_WERTPAPIER,
+    },
 };
 use chrono::{NaiveDate, NaiveDateTime};
+use diesel;
 use serde::{Deserialize, Serialize};
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
@@ -1413,8 +1420,7 @@ impl Clone for MaMandant {
 
 impl PartialEq for MaMandant {
     fn eq(&self, other: &Self) -> bool {
-        self.nr == other.nr
-            && self.beschreibung == other.beschreibung
+        self.nr == other.nr && self.beschreibung == other.beschreibung
     }
 }
 

@@ -3,6 +3,7 @@ extern crate rocket;
 
 // #[macro_use]
 extern crate diesel;
+extern crate rep;
 
 //#[macro_use]
 //extern crate rocket_dyn_templates;
@@ -52,7 +53,11 @@ fn launch() -> _ {
         //.attach(Template::fairing())
         .mount(
             "/",
-            routes![routes::root::get_json, routes::root::get_error,],
+            routes![
+                routes::root::get_json,
+                routes::root::get_error,
+                routes::root::list_requests,
+            ],
         )
         .mount(
             "/public/",

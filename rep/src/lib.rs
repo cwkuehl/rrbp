@@ -1,14 +1,13 @@
-//pub mod models;
+pub mod models;
 //pub mod models_ext;
 //mod res;
-//pub mod revision;
 mod reps;
-
-//#[macro_use]
-//extern crate diesel;
-
-#[allow(non_snake_case)]
+pub mod revision;
 pub mod schema;
+
+#[macro_use]
+extern crate diesel;
+extern crate serde;
 
 #[cfg(test)]
 mod tests {
