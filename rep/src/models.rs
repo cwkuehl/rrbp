@@ -1,19 +1,13 @@
 use crate::{
     revision::Revision,
-    schema::{
-        AD_ADRESSE, AD_PERSON, AD_SITZ, AG_DIALOG, BENUTZER, BYTE_DATEN, FZ_BUCH, FZ_BUCHAUTOR,
-        FZ_BUCHSERIE, FZ_BUCHSTATUS, FZ_FAHRRAD, FZ_FAHRRADSTAND, FZ_NOTIZ, HH_BILANZ, HH_BUCHUNG,
-        HH_EREIGNIS, HH_KONTO, HH_PERIODE, MA_MANDANT, MA_PARAMETER, SB_EREIGNIS, SB_FAMILIE,
-        SB_KIND, SB_PERSON, SB_QUELLE, SO_KURSE, TB_EINTRAG, TB_EINTRAG_ORT, TB_ORT, TB_WETTER,
-        WP_ANLAGE, WP_BUCHUNG, WP_KONFIGURATION, WP_STAND, WP_WERTPAPIER,
-    },
+    schema::{AD_ADRESSE, AD_PERSON, AD_SITZ, AG_DIALOG, BENUTZER, BYTE_DATEN, FZ_BUCH, FZ_BUCHAUTOR, FZ_BUCHSERIE, FZ_BUCHSTATUS, FZ_FAHRRAD, FZ_FAHRRADSTAND, FZ_NOTIZ, HH_BILANZ, HH_BUCHUNG, HH_EREIGNIS, HH_KONTO, HH_PERIODE, MA_MANDANT, MA_PARAMETER, SB_EREIGNIS, SB_FAMILIE, SB_KIND, SB_PERSON, SB_QUELLE, SO_KURSE, TB_EINTRAG, TB_EINTRAG_ORT, TB_ORT, TB_WETTER, WP_ANLAGE, WP_BUCHUNG, WP_KONFIGURATION, WP_STAND, WP_WERTPAPIER},
 };
 use chrono::{NaiveDate, NaiveDateTime};
 use diesel;
 use serde::{Deserialize, Serialize};
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "AD_ADRESSE"]
+#[diesel(table_name = AD_ADRESSE)]
 #[allow(non_snake_case)]
 pub struct AdAdresse {
     pub mandant_nr: i32,
@@ -87,7 +81,7 @@ impl Revision for AdAdresse {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "AD_PERSON"]
+#[diesel(table_name = AD_PERSON)]
 #[allow(non_snake_case)]
 pub struct AdPerson {
     pub mandant_nr: i32,
@@ -182,7 +176,7 @@ impl Revision for AdPerson {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "AD_SITZ"]
+#[diesel(table_name = AD_SITZ)]
 #[allow(non_snake_case)]
 pub struct AdSitz {
     pub mandant_nr: i32,
@@ -280,7 +274,7 @@ impl Revision for AdSitz {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "AG_DIALOG"]
+#[diesel(table_name = AG_DIALOG)]
 #[allow(non_snake_case)]
 pub struct AgDialog {
     pub mandant_nr: i32,
@@ -357,7 +351,7 @@ impl Revision for AgDialog {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "BENUTZER"]
+#[diesel(table_name = BENUTZER)]
 #[allow(non_snake_case)]
 pub struct Benutzer {
     pub mandant_nr: i32,
@@ -431,7 +425,7 @@ impl Revision for Benutzer {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "BYTE_DATEN"]
+#[diesel(table_name = BYTE_DATEN)]
 #[allow(non_snake_case)]
 pub struct ByteDaten {
     pub mandant_nr: i32,
@@ -502,7 +496,7 @@ impl Revision for ByteDaten {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "FZ_BUCH"]
+#[diesel(table_name = FZ_BUCH)]
 #[allow(non_snake_case)]
 pub struct FzBuch {
     pub mandant_nr: i32,
@@ -585,7 +579,7 @@ impl Revision for FzBuch {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "FZ_BUCHAUTOR"]
+#[diesel(table_name = FZ_BUCHAUTOR)]
 #[allow(non_snake_case)]
 pub struct FzBuchautor {
     pub mandant_nr: i32,
@@ -653,7 +647,7 @@ impl Revision for FzBuchautor {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "FZ_BUCHSERIE"]
+#[diesel(table_name = FZ_BUCHSERIE)]
 #[allow(non_snake_case)]
 pub struct FzBuchserie {
     pub mandant_nr: i32,
@@ -718,7 +712,7 @@ impl Revision for FzBuchserie {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "FZ_BUCHSTATUS"]
+#[diesel(table_name = FZ_BUCHSTATUS)]
 #[allow(non_snake_case)]
 pub struct FzBuchstatus {
     pub mandant_nr: i32,
@@ -788,7 +782,7 @@ impl Revision for FzBuchstatus {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "FZ_FAHRRAD"]
+#[diesel(table_name = FZ_FAHRRAD)]
 #[allow(non_snake_case)]
 pub struct FzFahrrad {
     pub mandant_nr: i32,
@@ -853,7 +847,7 @@ impl Revision for FzFahrrad {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "FZ_FAHRRADSTAND"]
+#[diesel(table_name = FZ_FAHRRADSTAND)]
 #[allow(non_snake_case)]
 pub struct FzFahrradstand {
     pub mandant_nr: i32,
@@ -932,7 +926,7 @@ impl Revision for FzFahrradstand {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "FZ_NOTIZ"]
+#[diesel(table_name = FZ_NOTIZ)]
 #[allow(non_snake_case)]
 pub struct FzNotiz {
     pub mandant_nr: i32,
@@ -997,7 +991,7 @@ impl Revision for FzNotiz {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "HH_BILANZ"]
+#[diesel(table_name = HH_BILANZ)]
 #[allow(non_snake_case)]
 pub struct HhBilanz {
     pub mandant_nr: i32,
@@ -1074,7 +1068,7 @@ impl Revision for HhBilanz {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "HH_BUCHUNG"]
+#[diesel(table_name = HH_BUCHUNG)]
 #[allow(non_snake_case)]
 pub struct HhBuchung {
     pub mandant_nr: i32,
@@ -1163,7 +1157,7 @@ impl Revision for HhBuchung {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "HH_EREIGNIS"]
+#[diesel(table_name = HH_EREIGNIS)]
 #[allow(non_snake_case)]
 pub struct HhEreignis {
     pub mandant_nr: i32,
@@ -1237,7 +1231,7 @@ impl Revision for HhEreignis {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "HH_KONTO"]
+#[diesel(table_name = HH_KONTO)]
 #[allow(non_snake_case)]
 pub struct HhKonto {
     pub mandant_nr: i32,
@@ -1326,7 +1320,7 @@ impl Revision for HhKonto {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "HH_PERIODE"]
+#[diesel(table_name = HH_PERIODE)]
 #[allow(non_snake_case)]
 pub struct HhPeriode {
     pub mandant_nr: i32,
@@ -1394,7 +1388,7 @@ impl Revision for HhPeriode {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "MA_MANDANT"]
+#[diesel(table_name = MA_MANDANT)]
 #[allow(non_snake_case)]
 pub struct MaMandant {
     pub nr: i32,
@@ -1420,7 +1414,8 @@ impl Clone for MaMandant {
 
 impl PartialEq for MaMandant {
     fn eq(&self, other: &Self) -> bool {
-        self.nr == other.nr && self.beschreibung == other.beschreibung
+        self.nr == other.nr
+            && self.beschreibung == other.beschreibung
     }
 }
 
@@ -1452,7 +1447,7 @@ impl Revision for MaMandant {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "MA_PARAMETER"]
+#[diesel(table_name = MA_PARAMETER)]
 #[allow(non_snake_case)]
 pub struct MaParameter {
     pub mandant_nr: i32,
@@ -1516,7 +1511,7 @@ impl Revision for MaParameter {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "SB_EREIGNIS"]
+#[diesel(table_name = SB_EREIGNIS)]
 #[allow(non_snake_case)]
 pub struct SbEreignis {
     pub mandant_nr: i32,
@@ -1613,7 +1608,7 @@ impl Revision for SbEreignis {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "SB_FAMILIE"]
+#[diesel(table_name = SB_FAMILIE)]
 #[allow(non_snake_case)]
 pub struct SbFamilie {
     pub mandant_nr: i32,
@@ -1687,7 +1682,7 @@ impl Revision for SbFamilie {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "SB_KIND"]
+#[diesel(table_name = SB_KIND)]
 #[allow(non_snake_case)]
 pub struct SbKind {
     pub mandant_nr: i32,
@@ -1751,7 +1746,7 @@ impl Revision for SbKind {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "SB_PERSON"]
+#[diesel(table_name = SB_PERSON)]
 #[allow(non_snake_case)]
 pub struct SbPerson {
     pub mandant_nr: i32,
@@ -1843,7 +1838,7 @@ impl Revision for SbPerson {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "SB_QUELLE"]
+#[diesel(table_name = SB_QUELLE)]
 #[allow(non_snake_case)]
 pub struct SbQuelle {
     pub mandant_nr: i32,
@@ -1923,7 +1918,7 @@ impl Revision for SbQuelle {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "SO_KURSE"]
+#[diesel(table_name = SO_KURSE)]
 #[allow(non_snake_case)]
 pub struct SoKurse {
     pub datum: NaiveDate,
@@ -1968,7 +1963,7 @@ impl PartialEq for SoKurse {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "TB_EINTRAG"]
+#[diesel(table_name = TB_EINTRAG)]
 #[allow(non_snake_case)]
 pub struct TbEintrag {
     pub mandant_nr: i32,
@@ -2032,7 +2027,7 @@ impl Revision for TbEintrag {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "TB_EINTRAG_ORT"]
+#[diesel(table_name = TB_EINTRAG_ORT)]
 #[allow(non_snake_case)]
 pub struct TbEintragOrt {
     pub mandant_nr: i32,
@@ -2097,7 +2092,7 @@ impl Revision for TbEintragOrt {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "TB_ORT"]
+#[diesel(table_name = TB_ORT)]
 #[allow(non_snake_case)]
 pub struct TbOrt {
     pub mandant_nr: i32,
@@ -2174,7 +2169,7 @@ impl Revision for TbOrt {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "TB_WETTER"]
+#[diesel(table_name = TB_WETTER)]
 #[allow(non_snake_case)]
 pub struct TbWetter {
     pub mandant_nr: i32,
@@ -2242,7 +2237,7 @@ impl Revision for TbWetter {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "WP_ANLAGE"]
+#[diesel(table_name = WP_ANLAGE)]
 #[allow(non_snake_case)]
 pub struct WpAnlage {
     pub mandant_nr: i32,
@@ -2313,7 +2308,7 @@ impl Revision for WpAnlage {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "WP_BUCHUNG"]
+#[diesel(table_name = WP_BUCHUNG)]
 #[allow(non_snake_case)]
 pub struct WpBuchung {
     pub mandant_nr: i32,
@@ -2399,7 +2394,7 @@ impl Revision for WpBuchung {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "WP_KONFIGURATION"]
+#[diesel(table_name = WP_KONFIGURATION)]
 #[allow(non_snake_case)]
 pub struct WpKonfiguration {
     pub mandant_nr: i32,
@@ -2470,7 +2465,7 @@ impl Revision for WpKonfiguration {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "WP_STAND"]
+#[diesel(table_name = WP_STAND)]
 #[allow(non_snake_case)]
 pub struct WpStand {
     pub mandant_nr: i32,
@@ -2535,7 +2530,7 @@ impl Revision for WpStand {
 }
 
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "WP_WERTPAPIER"]
+#[diesel(table_name = WP_WERTPAPIER)]
 #[allow(non_snake_case)]
 pub struct WpWertpapier {
     pub mandant_nr: i32,

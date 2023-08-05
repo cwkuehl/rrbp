@@ -31,16 +31,16 @@ mod tests {
                     && !a.name.starts_with("MO_")
                     && !a.name.starts_with("SO_xxx")
                     && !a.name.starts_with("VM_")
-                && a.name == "MA_Parameter"
+                //&& a.name == "MA_Parameter"
             })
             .collect::<Vec<_>>();
-        if self::mach_nichts() == 0 {
+        if self::mach_nichts() == 1 {
             let sb = create_reps(&t);
             println!("{}", sb);
         } else if self::mach_nichts() == 1 {
             let sb = create_undo_entry(&t);
             println!("{}", sb);
-        } else if self::mach_nichts() == 1 {
+        } else if self::mach_nichts() == 0 {
             std::fs::write(
                 "/home/wolfgang/rust/rrbp/rep/src/schema.rs",
                 create_schema(&t),
@@ -685,10 +685,11 @@ allow_tables_to_appear_in_same_query!("#,
             .join(", ");
         let mut sb = format!(
             r#"use crate::{{
-    apis::revision::Revision,
+    revision::Revision,
     schema::{{{}}},
 }};
 use chrono::{{NaiveDate, NaiveDateTime}};
+use diesel;
 use serde::{{Deserialize, Serialize}};
 "#,
             j,
@@ -699,7 +700,7 @@ use serde::{{Deserialize, Serialize}};
                 format!(
                     r#"
 #[derive(Queryable, Insertable, AsChangeset, Debug, Serialize, Deserialize)]
-#[table_name = "{}"]
+#[diesel(table_name = {})]
 #[allow(non_snake_case)]
 pub struct {} {{
 "#,
