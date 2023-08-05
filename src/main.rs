@@ -1,7 +1,5 @@
 #[macro_use]
 extern crate rocket;
-
-// #[macro_use]
 extern crate diesel;
 extern crate rep;
 
@@ -12,6 +10,8 @@ use reps::DbCon;
 use rocket_dyn_templates::handlebars::handlebars_helper;
 use rocket_dyn_templates::Template;
 
+mod auth;
+mod base;
 mod catchers;
 mod reps;
 mod routes;
@@ -40,6 +40,7 @@ handlebars_helper!(to_lower_case: |v: str| v.to_lowercase());
 
 #[launch]
 fn launch() -> _ {
+    let session_store = crate::auth::SessionStorage::new();
     rocket::build()
         .attach(DbCon::fairing())
         .attach(Template::custom(|engines| {
@@ -51,6 +52,7 @@ fn launch() -> _ {
                 .register_helper("to_lower_case", Box::new(to_lower_case));
         }))
         //.attach(Template::fairing())
+        .manage(session_store)
         .mount(
             "/",
             routes![
@@ -65,6 +67,14 @@ fn launch() -> _ {
                 //routes::public::index_json,
                 routes::public::index_template,
                 //routes::public::index_form,
+            ],
+        )
+        .mount(
+            "/auth/",
+            routes![
+                auth::login_template,
+                auth::logout_template,
+                auth::login_form,
             ],
         )
         .register("/", catchers![catchers::unauthorized])

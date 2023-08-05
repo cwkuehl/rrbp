@@ -1,4 +1,5 @@
 use rocket::{http::Status, response::{content, status}};
+use crate::auth::User;
 use crate::reps::DbCon;
 use rep::models::Benutzer;
 use rocket::serde::json::Json;
@@ -23,7 +24,7 @@ pub async fn get_error(id: u32) -> Result<String, Status> {
     Unfortunately we cannot direcrty implement Responder on `Vec<ContactRequest>`, hence we wrap in in json
 */
 #[get("/ben")] //, format = "application/json")]
-pub async fn list_requests(con: DbCon) -> Json<Vec<Benutzer>> {
+pub async fn list_requests(con: DbCon, user: User) -> Json<Vec<Benutzer>> {
     let res = crate::reps::benutzer::get_all(&con).await.unwrap_or_default();
     Json(res)
 }
