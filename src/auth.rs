@@ -6,7 +6,7 @@ use rocket::request::{FromRequest, Outcome};
 use rocket::response::Redirect;
 use rocket::{Request, State};
 use rocket_dyn_templates::Template;
-use serde::Deserialize;
+use serde::{Serialize, Deserialize};
 use std::collections::HashMap;
 use std::sync::{Arc, RwLock};
 use crate::base::functions::to_i32;
@@ -128,24 +128,11 @@ impl<'r> FromRequest<'r> for User{
 }
 
 /**
-    Holding the information that has to be passed from a login form.
-    We do not handle CSRF attacks here
-*/
-#[derive(Deserialize, FromForm)]
-pub struct LoginForm{
-    client: String,
-    username: String,
-    password: String
-}
-
-/**
     The Login and Logout routes handle the creation and destruction of session cookies.
     These cookies are stored as a `private cookie` and are protected against tampering by the user
         with authenticated encryption (AES-GCM). The key for this is configured in the `Rocket.toml`
          or re-created if not defined.
 */
-
-
 #[get("/logout")]
 pub fn logout_template(_user: User, cookies: &CookieJar<'_>, sessions: &State<SessionStorage>) -> Template {
     let cookie = cookies.get_private(AUTH_COOKIE_NAME)
@@ -155,9 +142,24 @@ pub fn logout_template(_user: User, cookies: &CookieJar<'_>, sessions: &State<Se
     Template::render("logout", &())
 }
 
+/**
+    Holding the information that has to be passed from a login form.
+    We do not handle CSRF attacks here
+*/
+#[derive(Serialize, Deserialize, FromForm)]
+pub struct LoginForm{
+    client: String,
+    username: String,
+    password: String
+}
+
 #[get("/login")]
 pub fn login_template() -> Template {
-    Template::render("login", &())
+    let mut form = LoginForm{ client: 1.to_string(), username: "".into(), password: "".into() };
+    if cfg!(debug_assertions) {
+        form = LoginForm{ client: 1.to_string(), username: "wolfgang".into(), password: "wolfgang".into() };
+    }
+    Template::render("login", &form)
 }
 
 #[post("/login", format = "application/x-www-form-urlencoded", data = "<form>")]

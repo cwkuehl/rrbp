@@ -4,11 +4,11 @@
 <body>
   <form action="/auth/login" method="post">
     <label for="client">Client:</label><br>
-    <input type="number" id="client" name="client"><br>
+    <input type="number" id="client" name="client" value="{{client}}"><br>
     <label for="username">User:</label><br>
-    <input type="text" id="username" name="username"><br>
+    <input type="text" id="username" name="username" value="{{username}}"><br>
     <label for="password">Pass:</label><br>
-    <input type="password" id="password" name="password">
+    <input type="password" id="password" name="password" value="{{password}}">
     <input type="submit" value="Login">
   </form>
 </body>
