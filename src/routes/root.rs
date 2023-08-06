@@ -1,12 +1,17 @@
-use rocket::{http::Status, response::{content, status}};
+use rocket::{http::Status, response::{Redirect, status}};
 use crate::auth::User;
 use crate::reps::DbCon;
 use rep::models::Benutzer;
 use rocket::serde::json::Json;
 
+// #[get("/")]
+// pub async fn get_json() -> status::Custom<content::RawJson<&'static str>> {
+//      status::Custom(Status::ImATeapot, content::RawJson("{ \"hi\": \"world\" }"))
+// }
+
 #[get("/")]
-pub async fn get_json() -> status::Custom<content::RawJson<&'static str>> {
-    status::Custom(Status::ImATeapot, content::RawJson("{ \"hi\": \"world\" }"))
+pub async fn login() -> Redirect {
+    Redirect::to("/auth/login")
 }
 
 #[get("/error/<id>")]

@@ -60,7 +60,8 @@ fn launch() -> _ {
         .mount(
             "/",
             routes![
-                routes::root::get_json,
+                // routes::root::get_json,
+                routes::root::login,
                 routes::root::get_error,
                 routes::root::list_requests,
             ],
