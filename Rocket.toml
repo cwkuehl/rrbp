@@ -8,3 +8,9 @@ sqlite_db = { url = "/home/wolfgang/hsqldb/rsbp.db" }
 [default.tls]
 certs = "/opt/Haushalt/CSBP/cert/cert.pem"
 key = "/opt/Haushalt/CSBP/cert/cert.key"
+
+[default.shutdown]
+ctrlc = true
+signals = ["term", "hup"]
+grace = 5
+mercy = 5

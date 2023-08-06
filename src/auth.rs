@@ -147,7 +147,7 @@ pub struct LoginForm{
 
 
 #[get("/logout")]
-pub fn logout_template( user: User, cookies: &CookieJar<'_>, sessions: &State<SessionStorage>) -> Template {
+pub fn logout_template(_user: User, cookies: &CookieJar<'_>, sessions: &State<SessionStorage>) -> Template {
     let cookie = cookies.get_private(AUTH_COOKIE_NAME)
         .expect("User guard worked but no Cookie?"); // this should be impossible to happen, hence we panic.
     sessions.destroy_session(&cookie.value().to_string());
@@ -160,10 +160,8 @@ pub fn login_template() -> Template {
     Template::render("login", &())
 }
 
-
 #[post("/login", format = "application/x-www-form-urlencoded", data = "<form>")]
 pub fn login_form(form: Form<LoginForm>,  cookies: &CookieJar<'_>, sessions: &State<SessionStorage>) -> Result<Redirect, Redirect> {
-
     // Authentication is mocked by checking whether username and password are the same
     let authenticated = form.username==form.password;
 

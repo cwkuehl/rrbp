@@ -1,3 +1,5 @@
+// Framework inspired by book Rust (Marco Amann, Joachim Baumann, Marcel Koch),
+// see https://github.com/dxfrontiers/rust-buch/blob/master/06_webprogrammierung
 #[macro_use]
 extern crate rocket;
 extern crate diesel;
