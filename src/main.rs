@@ -8,15 +8,16 @@ extern crate rep;
 //#[macro_use]
 //extern crate rocket_dyn_templates;
 
-use reps::DbCon;
-use rocket_dyn_templates::handlebars::handlebars_helper;
-use rocket_dyn_templates::Template;
-
 mod auth;
 mod base;
 mod catchers;
 mod reps;
 mod routes;
+
+use base::functions;
+use reps::DbCon;
+use rocket_dyn_templates::handlebars::handlebars_helper;
+use rocket_dyn_templates::Template;
 
 // define a helper using helper
 handlebars_helper!(include_css: |v: str| {
@@ -42,6 +43,7 @@ handlebars_helper!(to_lower_case: |v: str| v.to_lowercase());
 
 #[launch]
 fn launch() -> _ {
+    functions::mach_nichts();
     let session_store = crate::auth::SessionStorage::new();
     rocket::build()
         .attach(DbCon::fairing())
