@@ -16,7 +16,12 @@ pub async fn login() -> Redirect {
 
 #[get("/favicon.ico")]
 pub async fn favicon() -> Option<NamedFile> {
-    NamedFile::open("templates/icons/icon-32x32.ico").await.ok()
+    NamedFile::open("templates/res/icons/icon-32x32.ico").await.ok()
+}
+
+#[get("/rrbp.css")]
+pub async fn rrbp_css() -> Option<NamedFile> {
+    NamedFile::open("templates/res/css/rrbp.css").await.ok()
 }
 
 #[get("/error/<id>")]

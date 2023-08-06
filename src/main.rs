@@ -62,6 +62,7 @@ fn launch() -> _ {
             routes![
                 // routes::root::get_json,
                 routes::root::favicon,
+                routes::root::rrbp_css,
                 routes::root::login,
                 routes::root::get_error,
                 routes::root::list_requests,
