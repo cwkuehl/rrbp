@@ -62,9 +62,6 @@ fn launch() -> _ {
             routes![
                 // routes::root::get_json,
                 routes::root::favicon,
-                routes::root::min_css,
-                routes::root::pico_css,
-                routes::root::pico_bootstrap_css,
                 routes::root::bulma_dl_css,
                 routes::root::bulma_light_css,
                 routes::root::bulma_dark_css,

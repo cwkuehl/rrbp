@@ -1,8 +1,8 @@
-﻿License notice for Pico CSS v1.5.10 (https://picocss.com)
+﻿License notice for bulma v0.9.4 (https://bulma.io)
 ------------------------------------
 
-Copyright 2019-2023 - Licensed under MIT
-https://github.com/picocss/pico/blob/master/LICENSE.md
+Copyright 2023 - Licensed under MIT
+https://github.com/jgthms/bulma/blob/master/LICENSE
 
 
 

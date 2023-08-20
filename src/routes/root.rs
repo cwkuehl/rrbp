@@ -24,21 +24,6 @@ pub async fn rrbp_css() -> Option<NamedFile> {
     NamedFile::open("templates/res/css/rrbp.css").await.ok()
 }
 
-#[get("/min.css")]
-pub async fn min_css() -> Option<NamedFile> {
-    NamedFile::open("templates/res/css/min.css").await.ok()
-}
-
-#[get("/pico.css")]
-pub async fn pico_css() -> Option<NamedFile> {
-    NamedFile::open("templates/res/css/pico.css").await.ok()
-}
-
-#[get("/pico-bootstrap.css")]
-pub async fn pico_bootstrap_css() -> Option<NamedFile> {
-    NamedFile::open("templates/res/css/pico-bootstrap.css").await.ok()
-}
-
 #[get("/bulma-dl.css")]
 pub async fn bulma_dl_css() -> Option<NamedFile> {
     NamedFile::open("templates/res/css/bulma-dl.css").await.ok()
