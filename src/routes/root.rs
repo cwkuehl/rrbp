@@ -4,6 +4,24 @@ use crate::reps::DbCon;
 use rep::models::Benutzer;
 use rocket::serde::json::Json;
 
+pub struct CachedFile(NamedFile);
+
+impl<'r> rocket::response::Responder<'r,'r> for CachedFile {
+    fn respond_to(self, req: &rocket::Request) -> rocket::response::Result<'r> {
+        rocket::response::Response::build_from(self.0.respond_to(req)?)
+            .raw_header("Cache-control", "max-age=86400") //  24h (24*60*60)
+            .ok()
+        //  Last-Modified
+        // If-Modified-Since
+        // ETag
+        // If-Match
+        // Content-Disposition
+        // Cache-Control
+        // Content-Range, If-Range, Range
+        // Fallback Content-Type
+    }
+}
+
 // #[get("/")]
 // pub async fn get_json() -> status::Custom<content::RawJson<&'static str>> {
 //      status::Custom(Status::ImATeapot, content::RawJson("{ \"hi\": \"world\" }"))
@@ -30,8 +48,9 @@ pub async fn bulma_dl_css() -> Option<NamedFile> {
 }
 
 #[get("/bulma-light.css")]
-pub async fn bulma_light_css() -> Option<NamedFile> {
-    NamedFile::open("templates/res/css/bulma-light.css").await.ok()
+pub async fn bulma_light_css() -> Option<CachedFile> {
+    // NamedFile::open("templates/res/css/bulma-light.css").await.ok()
+    NamedFile::open("templates/res/css/bulma-light.css").await.ok().map(|nf| CachedFile(nf))
 }
 
 #[get("/bulma-dark.css")]
