@@ -1,0 +1,8 @@
+﻿License notice for Pico CSS v1.5.10 (https://picocss.com)
+------------------------------------
+
+Copyright 2019-2023 - Licensed under MIT
+https://github.com/picocss/pico/blob/master/LICENSE.md
+
+
+

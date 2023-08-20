@@ -3,15 +3,30 @@
 {{> base/header}}
 
 <body>
-  <form action="/auth/login" method="post">
-    <label for="client">Client:</label><br>
-    <input type="number" id="client" name="client" value="{{client}}"><br>
-    <label for="username">User:</label><br>
-    <input type="text" id="username" name="username" value="{{username}}"><br>
-    <label for="password">Pass:</label><br>
-    <input type="password" id="password" name="password" value="{{password}}">
-    <input type="submit" value="Login">
-  </form>
+  <!--i class="fa-solid fa-thumbs-up fa-5x"></i-->
+  <main class="container-fluid">
+    <form action="/auth/login" method="post">
+      <div class="row">
+        <div class="col-2">
+          <label for="client" css="col-1">Client:</label><br>
+        </div>
+        <div class="col-10">
+          <input type="number" id="client" name="client" value="{{client}}"><br>
+        </div>
+      </div>
+      <div class="row">
+        <label for="username">User:</label><br>
+        <input type="text" id="username" name="username" value="{{username}}" data-theme="light"><br>
+      </div>
+      <div class="grid">
+        <label for="password">Pass:</label><br>
+        <input type="password" id="password" name="password" value="{{password}}" data-theme="dark">
+      </div>
+      <div class="grid">
+        <input type="submit" value="Login">
+      </div>
+    </form>
+  </main>
 </body>
 
 </html>
