@@ -33,18 +33,23 @@ pub async fn login() -> Redirect {
 }
 
 #[get("/favicon.ico")]
-pub async fn favicon() -> Option<NamedFile> {
-    NamedFile::open("templates/res/icons/icon-32x32.ico").await.ok()
+pub async fn favicon() -> Option<CachedFile> {
+    NamedFile::open("templates/res/icons/icon-32x32.ico").await.ok().map(|nf| CachedFile(nf))
 }
 
+// #[get("/rrbp.css")]
+// pub async fn rrbp_css() -> Option<NamedFile> {
+//     NamedFile::open("templates/res/css/rrbp.css").await.ok()
+// }
+
 #[get("/rrbp.css")]
-pub async fn rrbp_css() -> Option<NamedFile> {
-    NamedFile::open("templates/res/css/rrbp.css").await.ok()
+pub async fn rrbp_css() -> Option<CachedFile> {
+    NamedFile::open("templates/res/css/rrbp.css").await.ok().map(|nf| CachedFile(nf))
 }
 
 #[get("/bulma-dl.css")]
-pub async fn bulma_dl_css() -> Option<NamedFile> {
-    NamedFile::open("templates/res/css/bulma-dl.css").await.ok()
+pub async fn bulma_dl_css() -> Option<CachedFile> {
+    NamedFile::open("templates/res/css/bulma-dl.css").await.ok().map(|nf| CachedFile(nf))
 }
 
 #[get("/bulma-light.css")]
@@ -54,8 +59,8 @@ pub async fn bulma_light_css() -> Option<CachedFile> {
 }
 
 #[get("/bulma-dark.css")]
-pub async fn bulma_dark_css() -> Option<NamedFile> {
-    NamedFile::open("templates/res/css/bulma-dark.css").await.ok()
+pub async fn bulma_dark_css() -> Option<CachedFile> {
+    NamedFile::open("templates/res/css/bulma-dark.css").await.ok().map(|nf| CachedFile(nf))
 }
 
 #[get("/error/<id>")]

@@ -165,13 +165,14 @@ pub fn login_template() -> Template {
 #[post("/login", format = "application/x-www-form-urlencoded", data = "<form>")]
 pub fn login_form(form: Form<LoginForm>,  cookies: &CookieJar<'_>, sessions: &State<SessionStorage>) -> Result<Redirect, Redirect> {
     // Authentication is mocked by checking whether username and password are the same
-    let authenticated = form.username==form.password;
+    let authenticated = form.username == form.password;
 
     if authenticated {
         let user = User{ client: to_i32(form.client.as_str()), user_id: form.username.to_string() };
         let session_id = sessions.create_session(user);
         cookies.add_private(Cookie::new(AUTH_COOKIE_NAME, session_id));
-        Ok(Redirect::to("/admin/requests".to_string()))
+        //Ok(Redirect::to("/admin/requests".to_string()))
+        Ok(Redirect::to("/public".to_string()))
     }
     else {
         Err(Redirect::to("/auth/login".to_string()))
