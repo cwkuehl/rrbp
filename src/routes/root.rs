@@ -63,6 +63,11 @@ pub async fn bulma_dark_css() -> Option<CachedFile> {
     NamedFile::open("templates/res/css/bulma-dark.css").await.ok().map(|nf| CachedFile(nf))
 }
 
+#[get("/jquery-3.7.1.min.js")]
+pub async fn jquery_js() -> Option<CachedFile> {
+    NamedFile::open("templates/res/scripts/jquery-3.7.1.min.js").await.ok().map(|nf| CachedFile(nf))
+}
+
 #[get("/error/<id>")]
 pub async fn get_error(id: u32) -> Result<String, Status> {
   match id {
