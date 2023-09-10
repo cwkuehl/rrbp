@@ -66,6 +66,7 @@ fn launch() -> _ {
                 routes::root::bulma_light_css,
                 routes::root::bulma_dark_css,
                 routes::root::jquery_js,
+                routes::root::image_png,
                 routes::root::rrbp_css,
                 routes::root::login,
                 routes::root::get_error,

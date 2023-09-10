@@ -68,6 +68,11 @@ pub async fn jquery_js() -> Option<CachedFile> {
     NamedFile::open("templates/res/scripts/jquery-3.7.1.min.js").await.ok().map(|nf| CachedFile(nf))
 }
 
+#[get("/image.png")]
+pub async fn image_png() -> Option<CachedFile> {
+    NamedFile::open("templates/res/icons/image.png").await.ok().map(|nf| CachedFile(nf))
+}
+
 #[get("/error/<id>")]
 pub async fn get_error(id: u32) -> Result<String, Status> {
   match id {

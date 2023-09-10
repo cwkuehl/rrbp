@@ -4,29 +4,46 @@
 
 <body>
   <!--i class="fa-solid fa-thumbs-up fa-5x"></i-->
-  <main class="container-fluid">
-    <form action="/auth/login" method="post">
-      <div class="row">
-        <div class="col-2">
-          <label for="client" css="col-1">Client:</label><br>
+  <form action="/auth/login" method="post">
+    <div class="columns">
+      <div class="column">
+        <div class="field">
+          <label for="client" css="label">Client:</label>
+          <div class="control">
+            <input type="number" id="client" name="client" placeholder="Client number" value="{{client}}">
+          </div>
         </div>
-        <div class="col-10">
-          <input type="number" id="client" name="client" value="{{client}}"><br>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <div class="field">
+          <label for="username" css="label">User:</label>
+          <div class="control">
+            <input type="number" id="username" name="username" placeholder="User name" value="{{username}}">
+          </div>
         </div>
       </div>
-      <div class="row">
-        <label for="username">User:</label><br>
-        <input type="text" id="username" name="username" value="{{username}}" data-theme="light"><br>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <div class="field">
+          <label for="password" css="label">Password:</label>
+          <div class="control">
+            <input type="number" id="password" name="password" placeholder="Password" value="{{password}}">
+          </div>
+        </div>
       </div>
-      <div class="grid">
-        <label for="password">Pass:</label><br>
-        <input type="password" id="password" name="password" value="{{password}}" data-theme="dark">
+    </div>
+    <div class="field is-grouped">
+      <div class="control">
+      <input type="submit" class="button is-link" value="Login">
       </div>
-      <div class="grid">
-        <input type="submit" value="Login">
+      <div class="control">
+        <button class="button is-link is-light">Cancel</button>
       </div>
-    </form>
-  </main>
+    </div>
+  </form>
 </body>
 
 </html>

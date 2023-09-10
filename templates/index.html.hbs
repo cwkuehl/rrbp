@@ -12,6 +12,50 @@
   </form>
   <p>{{include_css "aAa" }}</p>
   <p>{{to_lower_case "aAa" }}</p>
+  <div class="tabs is-toggle is-fullwidth" id="tabs">
+  <ul>
+    <li class="is-active" data-tab="1">
+      <a>
+        <span class="icon is-small"><img src="/image.png"></i></span>
+        <span>Pictures</span>
+      </a>
+    </li>
+    <li data-tab="2">
+      <a>
+        <span class="icon is-small"><i class="fa fa-music"></i></span>
+        <span>Music</span>
+      </a>
+    </li>
+    <li data-tab="3">
+      <a>
+        <span class="icon is-small"><i class="fa fa-film"></i></span>
+        <span>Videos</span>
+      </a>
+    </li>
+    <li data-tab="4">
+      <a>
+        <span class="icon is-small"><i class="fa fa-file-text-o"></i></span>
+        <span>Documents</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div id="tab-content">
+  <p class="is-active" data-content="1">
+    Pictures
+  </p>
+  <p data-content="2">
+    Music
+  </p>
+  <p data-content="3">
+
+    Videos
+  </p>
+  <p data-content="4">
+    Documents
+  </p>
+</div>
+
 </body>
 
 </html>
