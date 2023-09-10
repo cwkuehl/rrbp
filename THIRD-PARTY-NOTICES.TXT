@@ -5,4 +5,5 @@ Copyright 2023 - Licensed under MIT
 https://github.com/jgthms/bulma/blob/master/LICENSE
 
 
+jQuery v3.7.1 | (c) OpenJS Foundation and other contributors | jquery.org/license
 
