@@ -36,8 +36,7 @@ impl SessionStorage {
             and stored in the sessions map so that when a user presents us with this id, we can look
             up their identity. Since we need to modify the session store by inserting,
             this requires a write lock.
-        This function will panic, if the RwLock is poisoned,
-
+        This function will panic, if the RwLock is poisoned.
     */
     pub fn create_session(&self, user: User) -> String {
         self.sessions
@@ -48,7 +47,8 @@ impl SessionStorage {
                     .fill(&mut bytes)
                     .expect("System Random is broken");
                 let session_id = hex::encode(bytes);
-                guard.insert(session_id.clone(), user.user_id);
+                let u = format!("{}###{}", user.client, user.user_id);
+                guard.insert(session_id.clone(), u);
                 session_id
             })
             .expect("Session storage lock is poisoned, aborting")
@@ -147,7 +147,7 @@ pub fn logout_template(_user: User, cookies: &CookieJar<'_>, sessions: &State<Se
     We do not handle CSRF attacks here
 */
 #[derive(Serialize, Deserialize, FromForm)]
-pub struct LoginForm{
+pub struct LoginForm {
     client: String,
     username: String,
     password: String
@@ -155,9 +155,9 @@ pub struct LoginForm{
 
 #[get("/login")]
 pub fn login_template() -> Template {
-    let mut form = LoginForm{ client: 1.to_string(), username: "".into(), password: "".into() };
+    let mut form = LoginForm { client: 1.to_string(), username: "".into(), password: "".into() };
     if cfg!(debug_assertions) {
-        form = LoginForm{ client: 1.to_string(), username: "wolfgang".into(), password: "wolfgang".into() };
+        form = LoginForm { client: 1.to_string(), username: "wolfgang".into(), password: "wolfgang".into() };
     }
     Template::render("login", &form)
 }
@@ -168,7 +168,7 @@ pub fn login_form(form: Form<LoginForm>,  cookies: &CookieJar<'_>, sessions: &St
     let authenticated = form.username == form.password;
 
     if authenticated {
-        let user = User{ client: to_i32(form.client.as_str()), user_id: form.username.to_string() };
+        let user = User { client: to_i32(form.client.as_str()), user_id: form.username.to_string() };
         let session_id = sessions.create_session(user);
         cookies.add_private(Cookie::new(AUTH_COOKIE_NAME, session_id));
         //Ok(Redirect::to("/admin/requests".to_string()))
