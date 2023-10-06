@@ -90,5 +90,11 @@ pub async fn get_error(id: u32) -> Result<String, Status> {
 #[get("/ben")] //, format = "application/json")]
 pub async fn list_requests(con: DbCon, _user: User) -> Json<Vec<Benutzer>> {
     let res = crate::reps::benutzer::get_all(&con).await.unwrap_or_default();
-    Json(res)
+    let mut ben = Vec::new();
+    for b in res {
+      let mut bc = b.clone();
+      bc.passwort = Some("xxx".to_string());
+      ben.push(bc);
+    }
+    Json(ben)
 }

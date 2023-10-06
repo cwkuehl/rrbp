@@ -11,6 +11,7 @@ extern crate rep;
 mod auth;
 mod base;
 mod catchers;
+mod jwt;
 mod reps;
 mod routes;
 
@@ -44,6 +45,10 @@ handlebars_helper!(to_lower_case: |v: str| v.to_lowercase());
 #[launch]
 fn launch() -> _ {
     functions::mach_nichts();
+    let jwtoken = format!("Bearer {}", jwt::create_jwt(1).unwrap()).to_string();
+    println!("jwt: {}", jwtoken);
+    let claims = jwt::decode_jwt(jwtoken).unwrap();
+    //println!("claims: {}", claims);
     let session_store = crate::auth::SessionStorage::new();
     rocket::build()
         .attach(DbCon::fairing())
@@ -89,5 +94,6 @@ fn launch() -> _ {
                 auth::login_form,
             ],
         )
+        .mount("/jwt/", routes![jwt::publish_post_handler,])
         .register("/", catchers![catchers::unauthorized])
 }
